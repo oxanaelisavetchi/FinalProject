@@ -7,36 +7,33 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 /**
  * DriverFactory inițializează un WebDriver (Chrome) folosind WebDriverManager.
- * Folosim ThreadLocal<WebDriver> pentru a susține rularea paralelă a testelor.
+ * Toate clasele de test pot apela DriverFactory.initDriver() și DriverFactory.getDriver().
  */
 public class DriverFactory {
 
-    // ThreadLocal va păstra o instanță WebDriver pentru fiecare thread (test paralel)
+    // ThreadLocal păstrează o instanță de WebDriver pentru fiecare thread (pentru rulare paralelă)
     private static final ThreadLocal<WebDriver> driverThread = new ThreadLocal<>();
 
     /**
-     * Inițializează și setează WebDriver (Chrome).
-     * Dacă vrei să rulezi headless, poți adăuga opțiunea corespunzătoare.
+     * Inițializează și setează driverul de Chrome în ThreadLocal.
      */
     public static void initDriver() {
-        // 1. Descarcă automat chromedriver-ul (versiunea compatibilă cu Chrome-ul instalat)
+        // Descarcă automat chromedriver-ul corespunzător versiunii instalate de Chrome
         WebDriverManager.chromedriver().setup();
 
-        // 2. Setează opțiunile Chrome (poți adăuga alte argumente dacă vrei)
+        // Setează opțiunile Chrome (maximizat, notificări dezactivate)
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");       // pornește Chrome maximizat
-        options.addArguments("--disable-notifications");  // dezactivează notificările (dacă apar)
+        options.addArguments("--start-maximized");
+        options.addArguments("--disable-notifications");
 
-        // 3. Creează instanța efectivă de ChromeDriver
+        // Instanțiază driverul și îl păstrează în ThreadLocal
         WebDriver driver = new ChromeDriver(options);
-
-        // 4. Pune driverul în ThreadLocal, ca fiecare test (thread) să aibă instanța lui separată
         driverThread.set(driver);
     }
 
     /**
-     * Returnează instanța WebDriver din ThreadLocal.
-     * Dacă nu a fost apelat initDriver(), aruncă o RuntimeException clară.
+     * Returnează instanța WebDriver asociată thread-ului curent.
+     * Dacă initDriver() nu a fost apelat înainte, se aruncă o excepție.
      */
     public static WebDriver getDriver() {
         WebDriver driver = driverThread.get();
@@ -47,8 +44,7 @@ public class DriverFactory {
     }
 
     /**
-     * Închide browser-ul și curăță referința din ThreadLocal.
-     * Apelează această metodă la finalul fiecărui test.
+     * Închide browserul și șterge instanța din ThreadLocal.
      */
     public static void quitDriver() {
         WebDriver driver = driverThread.get();
