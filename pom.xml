@@ -7,6 +7,8 @@
     <groupId>org.example</groupId>
     <artifactId>FinalProject</artifactId>
     <version>1.0-SNAPSHOT</version>
+<!-- <packaging>pom</packaging>-->
+
 
     <properties>
         <maven.compiler.source>24</maven.compiler.source>
@@ -15,34 +17,154 @@
     </properties>
 
     <dependencies>
-        <!-- 1. Selenium WebDriver -->
+
+        <!-- Cucumber -->
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>4.9.0</version>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>7.20.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
+            <version>7.20.1</version>
+            <scope>test</scope>
         </dependency>
 
-        <!-- 2. WebDriverManager (pentru a descărca automat driver-ele) -->
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>5.3.2</version>
-        </dependency>
-
-        <!-- 3. JUnit 5 (Jupiter API și Engine) -->
+        <!-- JUnit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.10.0</version>
+            <version>5.11.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.10.0</version>
+            <version>5.11.0-M2</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite</artifactId>
+            <version>1.11.0-M2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Reporting -->
+        <dependency>
+            <groupId>net.masterthought</groupId>
+            <artifactId>cucumber-sandwich</artifactId>
+            <version>5.7.8</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.qameta.allure</groupId>-->
+<!--            <artifactId>allure-junit5</artifactId>-->
+<!--            <version>${allure.version}</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
+
+        <!-- Selenium -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.25.0</version>
+        </dependency>
+
+        <!-- RestAssured -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>5.5.0</version>
+        </dependency>
+
+        <!-- JSON + Jackson -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20240303</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.17.2</version>
+        </dependency>
+
+        <!-- Logging -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.5.6</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Groovy (necesar pentru RestAssured intern) -->
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy</artifactId>
+            <version>3.0.9</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Alte utilitare -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.34</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <version>3.0</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.4.0</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.3.1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.13.0</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.3.1</version>
+                </plugin>
+
+                <!-- Dacă nu generezi JAR (doar teste) dezactivează maven-jar-plugin -->
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.4.2</version>
+                    <executions>
+                        <execution>
+                            <id>default-jar</id>
+                            <phase>none</phase>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>3.1.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>3.1.2</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 
 
