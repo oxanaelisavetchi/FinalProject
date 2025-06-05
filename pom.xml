@@ -1,28 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
+    <groupId>com.automation.project</groupId>
     <artifactId>FinalProject</artifactId>
     <version>1.0-SNAPSHOT</version>
-<!-- <packaging>pom</packaging>-->
-
+    <!-- Dacă nu construiești un JAR de cod „productiv”, poți să rămâi implicit cu <packaging>jar</packaging>
+         și apoi să pui skip pentru maven-jar-plugin mai jos. -->
 
     <properties>
-        <maven.compiler.source>24</maven.compiler.source>
-        <maven.compiler.target>24</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Poți defini versiuni centrale în properties pentru a le reutiliza:
+        <cucumber.version>7.20.1</cucumber.version>
+        <junit.version>5.11.2</junit.version>
+        ... -->
     </properties>
 
     <dependencies>
-
-        <!-- Cucumber -->
+        <!-- ===================== BDD/Cucumber ===================== -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
             <version>7.20.1</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
@@ -31,7 +36,16 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- JUnit 5 -->
+        <!-- WebDriverManager – pentru descărcarea/gestiunea automată a driverelor -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.3.2</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <!-- ======================= JUnit 5 ======================== -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -41,56 +55,64 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.11.0-M2</version>
+            <version>5.11.2</version>
             <scope>test</scope>
         </dependency>
+        <!-- junit-platform-suite îl poți adăuga dacă ai nevoie de test-suite configurații speciale -->
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-suite</artifactId>
-            <version>1.11.0-M2</version>
+            <version>1.11.2</version>
             <scope>test</scope>
         </dependency>
 
-        <!-- Reporting -->
+        <!-- ==================== Raportare/TestLogging ==================== -->
         <dependency>
             <groupId>net.masterthought</groupId>
             <artifactId>cucumber-sandwich</artifactId>
             <version>5.7.8</version>
+            <scope>test</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>io.qameta.allure</groupId>-->
-<!--            <artifactId>allure-junit5</artifactId>-->
-<!--            <version>${allure.version}</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
+        <!-- dacă vrei Allure, poți decomenta și gestiona versiunea în properties:
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>${allure.version}</version>
+            <scope>test</scope>
+        </dependency>
+        -->
 
-        <!-- Selenium -->
+        <!-- ====================== Selenium UI ======================= -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.25.0</version>
+            <scope>test</scope>
         </dependency>
 
-        <!-- RestAssured -->
+        <!-- ==================== API Testing ======================= -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>5.5.0</version>
+            <scope>test</scope>
         </dependency>
 
-        <!-- JSON + Jackson -->
+        <!-- JSON + Jackson pentru serializare/deserializare API -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20240303</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.17.2</version>
+            <scope>test</scope>
         </dependency>
 
-        <!-- Logging -->
+        <!-- ====================== Logging ======================= -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -98,7 +120,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Groovy (necesar pentru RestAssured intern) -->
+        <!-- Groovy e necesar intern pentru RestAssured (uneori e deja inclus transitiv, dar poți păstra explicit) -->
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy</artifactId>
@@ -106,7 +128,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Alte utilitare -->
+        <!-- ==================== Alte utilitare ==================== -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -119,53 +141,35 @@
             <version>3.0</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <artifactId>maven-clean-plugin</artifactId>
-                    <version>3.4.0</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.3.1</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.13.0</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.3.1</version>
-                </plugin>
+        <plugins>
+            <!-- =================== Compiler Plugin ==================== -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
 
-                <!-- Dacă nu generezi JAR (doar teste) dezactivează maven-jar-plugin -->
-                <plugin>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.4.2</version>
-                    <executions>
-                        <execution>
-                            <id>default-jar</id>
-                            <phase>none</phase>
-                        </execution>
-                    </executions>
-                </plugin>
+            <!-- ================ Surefire Plugin (JUnit 5 + Cucumber) ================ -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <includes>
+                        <!-- detectează runner-ul Cucumber care trebuie să se termine în *Test.java -->
+                        <include>**/TestRunnerTest.java</include>
+                    </includes>
 
-                <plugin>
-                    <artifactId>maven-install-plugin</artifactId>
-                    <version>3.1.2</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.1.2</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
-
-
-
 </project>
