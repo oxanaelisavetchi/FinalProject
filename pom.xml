@@ -8,6 +8,7 @@
     <groupId>com.automation.project</groupId>
     <artifactId>FinalProject</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <!-- Dacă nu construiești un JAR de cod „productiv”, poți să rămâi implicit cu <packaging>jar</packaging>
          și apoi să pui skip pentru maven-jar-plugin mai jos. -->
 
@@ -40,7 +41,7 @@
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>5.3.2</version>
+            <version>5.8.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -73,14 +74,14 @@
             <version>5.7.8</version>
             <scope>test</scope>
         </dependency>
-        <!-- dacă vrei Allure, poți decomenta și gestiona versiunea în properties:
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-junit5</artifactId>
-            <version>${allure.version}</version>
-            <scope>test</scope>
-        </dependency>
-        -->
+        <!-- dacă vrei Allure, poți decomenta și gestiona versiunea în properties:-->
+<!--        <dependency>-->
+<!--            <groupId>io.qameta.allure</groupId>-->
+<!--            <artifactId>allure-junit5</artifactId>-->
+<!--            <version>${allure.version}</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
+
 
         <!-- ====================== Selenium UI ======================= -->
         <dependency>
@@ -156,7 +157,22 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.1</version>
+                <configuration>
+                    <skipIfEmpty>true</skipIfEmpty>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
             <!-- ================ Surefire Plugin (JUnit 5 + Cucumber) ================ -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

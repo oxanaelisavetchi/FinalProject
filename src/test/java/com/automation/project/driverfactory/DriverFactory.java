@@ -10,7 +10,7 @@ public class DriverFactory {
     private static ThreadLocal<WebDriver> driverThread = new ThreadLocal<>();
 
     public static void initDriver() {
-        WebDriverManager.chromedriver().driverVersion("137.0.7151.56").setup();
+        WebDriverManager.chromedriver().clearDriverCache().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized", "--disable-notifications");
         WebDriver driver = new ChromeDriver(options);

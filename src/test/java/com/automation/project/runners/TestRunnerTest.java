@@ -4,8 +4,7 @@ import io.cucumber.junit.platform.engine.Cucumber;
 import io.cucumber.junit.platform.engine.Constants;
 import org.junit.platform.suite.api.*;
 
-//@Suite
-@Cucumber
+@Suite
 @IncludeEngines("cucumber")
 @SelectClasspathResource("features") // caută în src/test/resources/features
 @ConfigurationParameter(
@@ -16,7 +15,7 @@ import org.junit.platform.suite.api.*;
 )
 @ConfigurationParameter(
         key = Constants.PLUGIN_PROPERTY_NAME,
-        value = "pretty, html:target/evidence/cucumber-report/report.html,json:target/cucumber-report/cucumber.json, summary"
+        value = "pretty, html:target/evidence/cucumber-report/report.html, summary"
 )
 @ConfigurationParameter(
         key = Constants.FILTER_TAGS_PROPERTY_NAME,
