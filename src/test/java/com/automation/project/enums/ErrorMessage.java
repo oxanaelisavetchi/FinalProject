@@ -5,7 +5,7 @@ import lombok.Getter;
 
 
 @Getter
-public enum ErrorMessages {
+public enum ErrorMessage {
     USERNAME_REQUIRED("Epic sadface: Username is required"),
     PASSWORD_REQUIRED("Epic sadface: Password is required"),
     INVALID_CREDENTIALS("Epic sadface: Username and password do not match any user in this service"),
@@ -13,7 +13,7 @@ public enum ErrorMessages {
 
     private final String message;
 
-    ErrorMessages(String message) {
+    ErrorMessage(String message) {
         this.message = message;
     }
     public String getMessage() {

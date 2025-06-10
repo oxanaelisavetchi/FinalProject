@@ -1,19 +1,18 @@
 package com.automation.project.actions;
 
-import com.automation.project.configuration.ConfigurationProperties;
-import io.restassured.http.ContentType;
+import com.automation.project.configuration.ConfigurationPropertie;
 import io.restassured.response.Response;
 import org.json.JSONObject;
 import static io.restassured.RestAssured.given;
 
 
-public class ApiRequests {
+public class ApiRequest {
 
-    private static final String baseUrl = ConfigurationProperties.getConfigPropertyValue("rest.api.url");
+    private static final String BASE_URL = ConfigurationPropertie.getConfigPropertyValue("rest.api.url");
 
     public static Response sendGetRequest(String path) {
         return given()
-                .baseUri(baseUrl)
+                .baseUri(BASE_URL)
                 .when()
                 .get(collectUrl(path))
                 .then()
@@ -31,7 +30,7 @@ public class ApiRequests {
     }
 
     public static String collectUrl(String path) {
-        String normalizedBase = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
+        String normalizedBase = BASE_URL.endsWith("/") ? BASE_URL : BASE_URL + "/";
         return normalizedBase + "api/" + path;
     }
 }

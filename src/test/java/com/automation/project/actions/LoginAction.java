@@ -4,11 +4,11 @@ import com.automation.project.pages.InventoryPage;
 import com.automation.project.pages.LoginPage;
 import org.openqa.selenium.WebDriver;
 
-public class LoginActions {
+public class LoginAction {
     private final WebDriver driver;
     private final LoginPage loginPage;
 
-    public LoginActions(WebDriver driver) {
+    public LoginAction(WebDriver driver) {
         this.driver = driver;
         this.loginPage = new LoginPage(driver);
     }

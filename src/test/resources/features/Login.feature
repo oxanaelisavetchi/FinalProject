@@ -4,8 +4,7 @@ Feature: Login Tests
 
   Background: Navigate to Home
     Given user navigates to 'Home' page
-
-  @ValidCredentials
+@UI
   Scenario Outline: Check the login functionality with valid credentials
     When user enters the <username> and <password>
     Then user enters on product page

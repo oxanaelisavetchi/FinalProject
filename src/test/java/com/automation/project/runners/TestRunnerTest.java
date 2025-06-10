@@ -6,7 +6,7 @@ import org.junit.platform.suite.api.*;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectClasspathResource("features") // caută în src/test/resources/features
+@SelectClasspathResource("features")
 @ConfigurationParameter(
         key = Constants.GLUE_PROPERTY_NAME,
         value = "com.automation.project.steps," +
@@ -19,7 +19,7 @@ import org.junit.platform.suite.api.*;
 )
 @ConfigurationParameter(
         key = Constants.FILTER_TAGS_PROPERTY_NAME,
-        value = "@LoginFunctionality" // schimbabil ușor
+        value = "@UI"
 )
 public class TestRunnerTest {
 }

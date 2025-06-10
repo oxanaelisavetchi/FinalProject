@@ -3,8 +3,9 @@ package com.automation.project.enums;
 import lombok.Getter;
 
 @Getter
-public enum ApiPaths {
-    // GET requests
+public enum ApiPath {
+
+    // GET
     USERS_ID("users/2"),
     UNKNOWN_2("unknown/2"),
     USERS_PAGE("users?page=2"),
@@ -13,22 +14,17 @@ public enum ApiPaths {
     UNKNOWN_23("unknown/23"),
     USERS_23("users/23"),
 
-    // POST requests
+    // POST
     USERS("users"),
     REGISTER("register"),
     LOGIN("login"),
 
-    // PUT/PATCH/DELETE requests
+    // PUT/DELETE
     USERS_2("users/2");
 
     private final String path;
 
-    ApiPaths(String path) {
-
+    ApiPath(String path) {
         this.path = path;
     }
-    public String getPath() {
-        return path;
-    }
-
 }
