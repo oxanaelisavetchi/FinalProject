@@ -4,46 +4,45 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class LoginPage {
-    private WebDriver driver;
-    private WebDriverWait wait;
 
+    private WebDriver driver;
+
+    // Selectori
     @FindBy(id = "user-name")
-    private WebElement usernameInput;
+    private WebElement usernameField;
 
     @FindBy(id = "password")
-    private WebElement passwordInput;
+    private WebElement passwordField;
 
     @FindBy(id = "login-button")
     private WebElement loginButton;
 
+    // Constructor
     public LoginPage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
     }
 
-    public void loadLoginPage() {
-        driver.get("https://www.saucedemo.com/v1/");
-        wait.until(ExpectedConditions.visibilityOf(loginButton));
+    // Deschide pagina de login
+    public void open() {
+        driver.get("https://www.saucedemo.com/");
     }
 
+    // Introduce username
     public void enterUsername(String username) {
-        wait.until(ExpectedConditions.visibilityOf(usernameInput));
-        usernameInput.clear();
-        usernameInput.sendKeys(username);
+        usernameField.clear();
+        usernameField.sendKeys(username);
     }
 
+    // Introduce password
     public void enterPassword(String password) {
-        passwordInput.clear();
-        passwordInput.sendKeys(password);
+        passwordField.clear();
+        passwordField.sendKeys(password);
     }
 
+    // Apasă login
     public void clickLogin() {
         loginButton.click();
     }
